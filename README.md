@@ -21,16 +21,58 @@ Add the following configuration to `.github/workflows/main.yml` to trigger Codem
               workflow-id: <MY-WORKFLOW-ID>
               token: ${{ secrets.CODEMAGIC_API_TOKEN }}
 
-Required `with` arguments:
+Arguments
+---------
 
-| Argument      | Description              |
-|---------------|--------------------------|
-| `app-id`      | Codemagic application ID |
-| `workflow-id` | Codemagic workflow ID    |
-| `token`       | Codemagic API token      |
+| Argument      | Description                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------- |
+| `app-id`      | [Application ID](https://docs.codemagic.io/rest-api/applications/) [**required**]                 |
+| `workflow-id` | [Workflow ID](https://docs.codemagic.io/rest-api/builds/) [**required**]                          |
+| `token`       | [API token](https://docs.codemagic.io/rest-api/codemagic-rest-api/#authentication) [**required**] |
+| `branch`      | GitHub event branch override                                                                      |
+| `tag`         | GitHub event tag override                                                                         |
+| `labels`      | Build labels, one label per line                                                                  |
+| `xcode`       | Xcode version e.g. 14.1                                                                           |
+| `flutter`     | Flutter version e.g. 3.3.3                                                                        |
+| `cocoapods`   | CocoaPods version e.g. 0.29.0                                                                     |
+| `node`        | Node version e.g. 16                                                                              |
+| `npm`         | NPM version e.g. 8.19.2                                                                           |
+| `ndk`         | NDK version e.g. 25.1.8937393                                                                     |
+| `java`        | Java version e.g. 18                                                                              |
+| `ruby`        | Ruby version e.g. 3.1.2                                                                           |
 
-Advanced configuration
-----------------------
+Note that branch and tag names are inferred from the event that triggered the action. `branch` or `tag` arguments will override the values from the event.
+
+Environment variables
+---------------------
+
+Use `CM_` prefix to pass environment variables to Codemagic builds.
+
+For example, define `CM_FOO` variable in the GitHub Action step configuration:
+
+    env:
+      CM_FOO: bar
+
+The corresponding variable `FOO` (without `CM_` prefix) will be available during Codemagic build.
+
+Output variables
+----------------
+
+Output variables can be used later in the action steps:
+
+    - name: Build ID
+      run: echo "${{ steps.build.outputs.build-id }}"
+
+| Output variable    | Description               |
+| ------------------ | ------------------------- |
+| `build-id`         | Codemagic build ID        |
+| `build-status-url` | Build status API endpoint |
+| `build-html-url`   | Build page on Codemagic   |
+
+Note that build page requires Codemagic account for access.
+
+Example
+-------
 
     on: push
 
@@ -53,35 +95,4 @@ Advanced configuration
             env:
               CM_IS_GITHUB_BUILD: true
               CM_RELEASE_NOTES: My release notes
-
-Optional `with` arguments:
-
-| Argument   | Description                  |
-|------------|------------------------------|
-| `branch`   | GitHub event branch override |
-| `tag`      | GitHub event tag override    |
-| `labels`   | Codemagic build labels       |
-| *software* | Version\*                    |
-
-\*Specify the version of a software to use in Codemagic build. Supported *software* arguments are `xcode`, `flutter`, `cocoapods`, `node`, `npm`, `ndk`, `java`,  and `ruby`.
-
-Note that branch and tag name are inferred from the event that triggered the action. Use `branch` or `tag` arguments to override.
-
-Add `CM_` prefix to environment variables to make them available in Codemagic builds:
-
-    env:
-      CM_FOO: bar
-
-Output variables can be used later in the action steps:
-
-    - name: Build ID
-      run: echo "${{ steps.build.outputs.build-id }}"
-
-| Output variable | Description                |
-| ----------------|----------------------------|
-| `build-id`      | Codemagic build ID         |
-| `build-api-url` | Build details API endpoint |
-| `build-url`     | Build page on Codemagic    |
-
-Use `build-api-url` API endpoint to retrieve status and information about the started build.
 

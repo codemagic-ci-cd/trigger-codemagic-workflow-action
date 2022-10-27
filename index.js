@@ -24,30 +24,30 @@ if (!branch && !tag) {
 }
 
 const variables = {}
-Object.entries(process.env).forEach(([key, value]) => {
-    if (key.startsWith('CM_')) {
-        variables[key] = value
+Object.entries(process.env).forEach(([actionVariableName, value]) => {
+    if (actionVariableName.startsWith('CM_')) {
+        const varirableName = actionVariableName.split('CM_')[1]
+        variables[varirableName] = value
     }
 })
 
+const softwareArguments = [
+    'xcode',
+    'flutter',
+    'cocoapods',
+    'node',
+    'npm',
+    'ndk',
+    'java',
+    'ruby',
+]
 const softwareVersions = {}
-{
-    [
-        'xcode',
-        'flutter',
-        'cocoapods',
-        'node',
-        'npm',
-        'ndk',
-        'java',
-        'ruby',
-    ].forEach(software => {
-        const version = getInput(software)
-        if (version) {
-            softwareVersions[software] = version
-        }
-    })
-}
+softwareArguments.forEach(software => {
+    const version = getInput(software)
+    if (version) {
+        softwareVersions[software] = version
+    }
+})
 
 const url = 'https://api.codemagic.io/builds'
 
@@ -69,10 +69,8 @@ try {
 
     const { buildId } = await response.data
     setOutput('build-id', buildId)
-    const buildApiUrl = `https://api.codemagic.io/builds/${buildId}`
-    setOutput('build-api-url', buildApiUrl)
-    const buildUrl = `https://codemagic.io/app/${appId}/build/${buildId}`
-    setOutput('build-url', buildUrl)
+    setOutput('build-status-url', `https://api.codemagic.io/builds/${buildId}`)
+    setOutput('build-html-url', `https://codemagic.io/app/${appId}/build/${buildId}`)
 } catch (error) {
     let details = null
     if (error.response.status === 403) {
