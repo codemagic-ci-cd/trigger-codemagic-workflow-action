@@ -41,7 +41,7 @@ Arguments
 | `java`        | Java version e.g. 18                                                                              |
 | `ruby`        | Ruby version e.g. 3.1.2                                                                           |
 
-Note that branch and tag names are inferred from the event that triggered the action. `branch` or `tag` arguments will override the values from the event.
+Note that branch and tag names are inferred from the event that triggered the action. `branch` or `tag` arguments will override the values from the event. `tag` argument takes precedence over `branch` if both arguments are provided.
 
 Environment variables
 ---------------------
