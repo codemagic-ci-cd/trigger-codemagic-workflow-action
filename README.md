@@ -69,7 +69,7 @@ Output variables can be used later in the action steps:
 | `build-status-url` | Build status API endpoint |
 | `build-html-url`   | Build page on Codemagic   |
 
-Note that build page requires Codemagic account for access.
+Note that the build page requires Codemagic account for access.
 
 Example
 -------
