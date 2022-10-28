@@ -1,7 +1,7 @@
 Trigger Codemagic workflow
 ==========================
 
-GitHub Action to trigger a workflow on Codemagic.
+GitHub Action to trigger a workflow on [Codemagic CI/CD](https://codemagic.io).
 
 Quick start
 -----------
@@ -21,8 +21,8 @@ Add the following configuration to `.github/workflows/main.yml` to trigger Codem
               workflow-id: <MY-WORKFLOW-ID>
               token: ${{ secrets.CODEMAGIC_API_TOKEN }}
 
-Arguments
----------
+Inputs
+------
 
 | Argument      | Description                                                                                       |
 | ------------- | ------------------------------------------------------------------------------------------------- |
@@ -55,8 +55,8 @@ For example, define the `CM_FOO` variable in the GitHub Action step configuratio
 
 The corresponding variable `FOO` (without the `CM_` prefix) will be available during the Codemagic build.
 
-Output variables
-----------------
+Outputs
+-------
 
 Output variables can be used later in the action steps:
 
