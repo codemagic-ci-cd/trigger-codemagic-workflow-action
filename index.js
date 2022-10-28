@@ -23,17 +23,12 @@ if (!branch && !tag) {
     tag = ref.split('refs/tags/')[1]
 }
 
-const variablePrefix = 'CM_'
-const variables = Object.entries(process.env).reduce(
-    (variables, [actionVariableName, value]) => {
-        if (actionVariableName.startsWith(variablePrefix)) {
-            const varirableName = actionVariableName.substring(variablePrefix.length)
-            variables[varirableName] = value
-        }
-        return variables
-    },
-    {},
-)
+const variables = Object.keys(process.env).reduce((variables, variable) => {
+    if (variable.startsWith('CM_')) {
+        variables[variable.substring(3)] = process.env[variable]
+    }
+    return variables
+}, {})
 
 const softwareVersions = [
     'xcode',
