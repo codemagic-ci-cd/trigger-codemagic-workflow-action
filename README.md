@@ -46,14 +46,14 @@ Note that branch and tag names are inferred from the event that triggered the ac
 Environment variables
 ---------------------
 
-Use `CM_` prefix to pass environment variables to Codemagic builds.
+Use the `CM_` prefix to pass environment variables to Codemagic builds.
 
-For example, define `CM_FOO` variable in the GitHub Action step configuration:
+For example, define the `CM_FOO` variable in the GitHub Action step configuration:
 
     env:
       CM_FOO: bar
 
-The corresponding variable `FOO` (without `CM_` prefix) will be available during Codemagic build.
+The corresponding variable `FOO` (without the `CM_` prefix) will be available during the Codemagic build.
 
 Output variables
 ----------------
