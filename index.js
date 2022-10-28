@@ -24,14 +24,15 @@ if (!branch && !tag) {
 }
 
 const variables = {}
+const variablePrefix = 'CM_'
 Object.entries(process.env).forEach(([actionVariableName, value]) => {
-    if (actionVariableName.startsWith('CM_')) {
-        const varirableName = actionVariableName.split('CM_')[1]
+    if (actionVariableName.startsWith(variablePrefix)) {
+        const varirableName = actionVariableName.replace(variablePrefix, '')
         variables[varirableName] = value
     }
 })
 
-const softwareArguments = [
+const softwareVersions = [
     'xcode',
     'flutter',
     'cocoapods',
@@ -40,14 +41,13 @@ const softwareArguments = [
     'ndk',
     'java',
     'ruby',
-]
-const softwareVersions = {}
-softwareArguments.forEach(software => {
+].reduce((softwareVersions, software) => {
     const version = getInput(software)
     if (version) {
         softwareVersions[software] = version
     }
-})
+    return softwareVersions
+}, {})
 
 const url = 'https://api.codemagic.io/builds'
 

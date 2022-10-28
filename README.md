@@ -63,36 +63,9 @@ Output variables can be used later in the action steps:
     - name: Build ID
       run: echo "${{ steps.build.outputs.build-id }}"
 
-| Output variable    | Description               |
-| ------------------ | ------------------------- |
-| `build-id`         | Codemagic build ID        |
-| `build-status-url` | Build status API endpoint |
-| `build-html-url`   | Build page on Codemagic   |
-
-Note that build page requires Codemagic account for access.
-
-Example
--------
-
-    on: push
-
-    jobs:
-      trigger-codemagic-build:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Trigger Codemagic build
-            id: build
-            uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v1.0.0
-            with:
-              app-id: <MY-APPLICATION-ID>
-              workflow-id: <MY-WORKFLOW-ID>
-              branch: <MY-BRANCH>
-              token: ${{ secrets.CODEMAGIC_API_TOKEN }}
-              labels: |
-                github
-                code-quality
-              xcode: 12.4
-            env:
-              CM_IS_GITHUB_BUILD: true
-              CM_RELEASE_NOTES: My release notes
+| Output variable    | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `build-id`         | Codemagic build ID                                |
+| `build-status-url` | Build status API endpoint                         |
+| `build-html-url`   | Build page, requires Codemagic account for access |
 
