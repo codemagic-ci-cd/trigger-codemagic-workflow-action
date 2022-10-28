@@ -1,0 +1,49 @@
+name: Trigger Codemagic workflow
+description: GitHub Action to trigger a workflow on Codemagic
+branding:
+  icon: star
+  color: purple
+
+inputs:
+  app-id:
+    description: Codemagic application ID
+    required: true
+  workflow-id:
+    description: Codemagic workflow ID 
+    required: true
+  token:
+    description: Codemagic API token
+    required: true
+  branch:
+    description: GitHub event branch override
+  tag:
+    description: GitHub event tag override
+  labels:
+    description: Build labels
+  xcode:
+    description: Xcode version
+  flutter:
+    description: Flutter version
+  cocoapods:
+    description: CocoaPods version
+  node:
+    description: Node version
+  npm:
+    description: NPM version
+  ndk:
+    description: NDK version
+  java:
+    description: Java version
+  ruby:
+    description: Ruby version
+outputs:
+  build-id:
+    description: Codemagic build ID
+  build-api-url:
+    description: Build details API endpoint
+  build-url:
+    description: Build page on Codemagic
+runs:
+  using: node16
+  main: dist/index.js
+
