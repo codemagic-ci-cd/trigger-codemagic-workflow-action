@@ -66,6 +66,5 @@ Output variables can be used later in the action steps:
 | Output variable    | Description                                       |
 | ------------------ | ------------------------------------------------- |
 | `build-id`         | Codemagic build ID                                |
-| `build-status-url` | Build status API endpoint                         |
-| `build-html-url`   | Build page, requires Codemagic account for access |
-
+| `build-api-url`    | Build status API endpoint                         |
+| `build-url`        | Build page, requires Codemagic account for access |

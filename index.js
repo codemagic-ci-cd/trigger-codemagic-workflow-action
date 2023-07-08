@@ -2,8 +2,8 @@ import axios from 'axios'
 
 import {
     getInput,
-    setFailed,
     getMultilineInput,
+    setFailed,
     setOutput,
 } from '@actions/core'
 import { context } from '@actions/github'
@@ -67,8 +67,8 @@ try {
 
     const { buildId } = await response.data
     setOutput('build-id', buildId)
-    setOutput('build-status-url', `https://api.codemagic.io/builds/${buildId}`)
-    setOutput('build-html-url', `https://codemagic.io/app/${appId}/build/${buildId}`)
+    setOutput('build-api-url', `https://api.codemagic.io/builds/${buildId}`)
+    setOutput('build-url', `https://codemagic.io/app/${appId}/build/${buildId}`)
 } catch (error) {
     let details = null
     if (error.response.status === 403) {
