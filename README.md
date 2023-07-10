@@ -68,3 +68,15 @@ Output variables can be used later in the action steps:
 | `build-id`         | Codemagic build ID                                |
 | `build-api-url`    | Build status API endpoint                         |
 | `build-url`        | Build page, requires Codemagic account for access |
+
+Development
+-----------
+
+Install dependencies
+
+    yarn
+
+Complie sources and dependencies into a standalone module
+
+    yarn ncc build index.js --license LICENSE
+
