@@ -78,5 +78,5 @@ Install dependencies
 
 Complie sources and dependencies into a standalone module
 
-    yarn ncc build index.js --license LICENSE
+    yarn ncc build --minify index.js --license LICENSE
 
