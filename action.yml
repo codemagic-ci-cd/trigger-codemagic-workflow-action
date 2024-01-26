@@ -44,6 +44,6 @@ outputs:
   build-url:
     description: Build page on Codemagic
 runs:
-  using: node16
+  using: node20
   main: dist/index.js
 
