@@ -15,7 +15,7 @@ Add the following configuration to `.github/workflows/main.yml` to trigger Codem
         runs-on: ubuntu-latest
         steps:
           - name: Trigger Codemagic build
-            uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v1.0.0
+            uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v2.0.0
             with:
               app-id: <MY-APPLICATION-ID>
               workflow-id: <MY-WORKFLOW-ID>
