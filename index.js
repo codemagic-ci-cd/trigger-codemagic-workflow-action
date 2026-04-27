@@ -1,12 +1,6 @@
-import axios from 'axios'
-
-import {
-    getInput,
-    getMultilineInput,
-    setFailed,
-    setOutput,
-} from '@actions/core'
-import { context } from '@actions/github'
+const axios = require('axios')
+const { getInput, getMultilineInput, setFailed, setOutput } = require('@actions/core')
+const { context } = require('@actions/github')
 
 async function run() {
     const appId = getInput('app-id')
@@ -66,7 +60,7 @@ async function run() {
     try {
         const response = await axios.post(url, payload, { headers })
 
-        const { buildId } = await response.data
+        const { buildId } = response.data
         setOutput('build-id', buildId)
         setOutput('build-api-url', `https://api.codemagic.io/builds/${buildId}`)
         setOutput('build-url', `https://codemagic.io/app/${appId}/build/${buildId}`)
