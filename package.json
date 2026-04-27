@@ -6,8 +6,7 @@
   "repository": "git@github.com:codemagic-ci-cd/trigger-codemagic-workflow-action.git",
   "author": "Artemii Yanushevskyi <artemii@nevercode.io>",
   "license": "MIT",
-  "type": "module",
-  "dependencies": {
+"dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
     "axios": "^1.1.3"
