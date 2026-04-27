@@ -66,7 +66,7 @@ async function run() {
         setOutput('build-url', `https://codemagic.io/app/${appId}/build/${buildId}`)
     } catch (error) {
         let details = null
-        if (error.response.status === 403) {
+        if (error.response.status === 401 || error.response.status === 403) {
             details = 'Either app ID or token is incorrect'
         } else {
             details = error.response.data.error
